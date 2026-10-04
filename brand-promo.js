@@ -29,6 +29,14 @@
     const list = document.createElement('ul'); tips.append(list);
     text.slice(5).forEach(item => add(list, 'li', item));
     add(promo, 'p', marketing[0]).className = 'side-label';
+    const brandLink = document.createElement('a');
+    brandLink.href = url; brandLink.className = 'side-brand';
+    const logo = document.createElement('img');
+    logo.src = arabic ? '/assets/brands/yalla-sawi.png' : '/assets/brands/upilote-mark.svg';
+    logo.alt = name; logo.className = arabic ? 'brand-wordmark' : 'brand-symbol';
+    brandLink.append(logo);
+    if (!arabic) { const wordmark = document.createElement('span'); wordmark.textContent = name; brandLink.append(wordmark); }
+    promo.append(brandLink);
     add(promo, 'h2', marketing[1]);
     add(promo, 'p', marketing[2]);
     const link = add(promo, 'a', marketing[3] + ' ' + name + ' ↗');
