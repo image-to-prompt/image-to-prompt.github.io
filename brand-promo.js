@@ -1,58 +1,47 @@
-(function () {
+﻿(function () {
   const api = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
-  const arabicCountries = new Set(['DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY','MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE']);
-  const brands = {
-    ar: {
-      name: 'يلا سوي',
-      url: 'https://yallasawi.com/?utm_source=image-to-prompt&utm_medium=website&utm_campaign=maker-link',
-      line: 'عندك فكرة لموقع؟ اكتبها بالعربي وابنِ موقعك مع يلا سوي.',
-      link: 'تعرّف على يلا سوي ↗'
-    },
-    other: {
-      name: 'uPilote',
-      url: 'https://upilote.com/?utm_source=image-to-prompt&utm_medium=website&utm_campaign=maker-link',
-      line: 'Have a website idea? Build it with uPilote.',
-      link: 'Explore uPilote ↗'
-    }
+  const countries = new Set(['DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY','MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE']);
+  const copy = {
+    en: ['From the maker of this tool','Build a website from your idea.','Describe your website, then refine the design and content.','Build with','Before you copy','Keep the subject, light, and viewpoint.','Remove details the model guessed.','Add settings for your image generator.'],
+    es: ['Del creador de esta herramienta','Crea un sitio web a partir de tu idea.','Describe tu sitio y ajusta el diseño y el contenido.','Crea con','Antes de copiar','Conserva el sujeto, la luz y el punto de vista.','Elimina los detalles que el modelo haya inventado.','Añade los ajustes de tu generador de imágenes.'],
+    zh: ['来自本工具的开发者','将你的想法变成网站。','描述你的网站，再调整设计和内容。','使用','复制之前','保留主体、光线和视角。','删除模型猜错的细节。','添加图像生成器所需的设置。'],
+    ru: ['От создателя этого инструмента','Создайте сайт по вашей идее.','Опишите сайт, затем уточните дизайн и содержание.','Создать с','Перед копированием','Сохраните объект, освещение и ракурс.','Удалите детали, которые модель угадала неверно.','Добавьте настройки вашего генератора изображений.'],
+    ar: ['من صانع هذه الأداة','حوّل فكرتك إلى موقع.','صف موقعك بالعربي، ثم عدّل التصميم والمحتوى.','ابنِ موقعك مع','قبل نسخ الوصف','احتفظ بالموضوع والإضاءة وزاوية الصورة.','احذف التفاصيل التي خمّنها النموذج خطأً.','أضف إعدادات أداة توليد الصور.']
   };
-  const arabicTips = '<span class="maker-label">بعد نسخ البرومبت</span><h2>حسّن الوصف</h2><ul><li>احتفظ بالموضوع والإضاءة وزاوية الصورة.</li><li>احذف التفاصيل التي خمّنها النموذج خطأً.</li><li>أضف إعدادات أداة توليد الصور التي تستخدمها.</li></ul><p class="maker-label">من صانع هذه الأداة</p><p id="maker-line"></p><a id="maker-link" href="https://yallasawi.com/">تعرّف على يلا سوي ↗</a>';
-  const otherTips = '<span class="maker-label">After you copy your prompt</span><h2>Make it more useful</h2><ul><li>Keep the subject, setting, light, and viewpoint.</li><li>Remove details the model guessed incorrectly.</li><li>Add your image model’s own settings.</li></ul><p class="maker-label">From the maker of this tool</p><p id="maker-line"></p><a id="maker-link" href="https://upilote.com/">Explore uPilote ↗</a>';
-
-  const style = document.createElement('style');
-  style.textContent = `
-    .maker-rail{background:#1e293b;border:1px solid #475569;border-radius:16px;padding:1.25rem;color:#f8fafc;font:14px/1.5 system-ui,sans-serif;max-width:760px;margin:1.5rem auto}
-    .maker-rail h2{font-size:1rem;margin:0 0 .7rem}.maker-rail p{margin:.7rem 0;color:#cbd5e1}.maker-rail ul{margin:.5rem 0 1rem;padding-left:1.25rem;color:#cbd5e1}.maker-rail li{margin:.4rem 0}.maker-rail a{color:#c7d2fe;text-underline-offset:3px}.maker-rail .maker-label{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8}
-    @media(min-width:1280px){body.has-maker-rail{padding-right:285px}.maker-rail{position:fixed;z-index:30;right:14px;top:100px;width:255px;max-height:calc(100vh - 120px);overflow:auto;margin:0}}
-  `;
-  document.head.append(style);
-
-  const rail = document.createElement('aside');
-  rail.className = 'maker-rail';
-  rail.setAttribute('aria-label', 'Prompt tips and project maker');
-  rail.innerHTML = otherTips;
-  const target = document.querySelector('#upload') || document.querySelector('main') || document.body;
-  target.insertAdjacentElement('afterend', rail);
-  document.body.classList.add('has-maker-rail');
-
-  function show(key) {
-    const brand = brands[key];
-    rail.innerHTML = key === 'ar' ? arabicTips : otherTips;
-    rail.querySelector('#maker-line').textContent = brand.line;
-    const link = rail.querySelector('#maker-link');
-    link.textContent = brand.link;
-    link.href = brand.url;
-    rail.lang = key === 'ar' ? 'ar' : 'en';
-    rail.dir = key === 'ar' ? 'rtl' : 'ltr';
-    for (const el of document.querySelectorAll('[data-maker-link]')) {
-      el.href = brand.url;
-      el.textContent = brand.name;
-    }
+  const language = document.documentElement.lang.split('-')[0];
+  const tips = document.createElement('aside');
+  tips.className = 'side-panel side-panel-left';
+  const promo = document.createElement('aside');
+  promo.className = 'side-panel side-panel-right';
+  const target = document.querySelector('#upload') || document.querySelector('.hero') || document.querySelector('main');
+  if (!target) return;
+  target.insertAdjacentElement('afterend', tips);
+  tips.insertAdjacentElement('afterend', promo);
+  document.body.classList.add('has-side-panels');
+  function show(arabic) {
+    const text = copy[language] || copy.en;
+    const marketing = arabic && language === 'en' ? copy.ar : text;
+    const name = arabic ? 'يلا سوي' : 'uPilote';
+    const url = 'https://' + (arabic ? 'yallasawi.com' : 'upilote.com') + '/?utm_source=image-to-prompt&utm_medium=sidebar&utm_campaign=maker-link';
+    tips.replaceChildren(); promo.replaceChildren();
+    const add = (parent, tag, value) => { const el = document.createElement(tag); el.textContent = value; parent.append(el); return el; };
+    add(tips, 'h2', text[4]);
+    const list = document.createElement('ul'); tips.append(list);
+    text.slice(5).forEach(item => add(list, 'li', item));
+    add(promo, 'p', marketing[0]).className = 'side-label';
+    add(promo, 'h2', marketing[1]);
+    add(promo, 'p', marketing[2]);
+    const link = add(promo, 'a', marketing[3] + ' ' + name + ' ↗');
+    link.href = url; link.className = 'side-cta';
+    promo.lang = arabic && language === 'en' ? 'ar' : language;
+    promo.dir = promo.lang === 'ar' ? 'rtl' : 'ltr';
+    tips.lang = language; tips.dir = language === 'ar' ? 'rtl' : 'ltr';
+    tips.setAttribute('aria-label',text[4]); promo.setAttribute('aria-label',marketing[0]);
+    document.querySelectorAll('[data-maker-link]').forEach(el => { el.href = url; el.textContent = name; });
   }
-
-  const fallbackArabic = document.documentElement.lang === 'ar' || (navigator.language || '').toLowerCase().startsWith('ar');
-  show(fallbackArabic ? 'ar' : 'other');
-  fetch(`${api}/api/region`, { cache: 'no-store' })
-    .then(response => response.ok ? response.json() : Promise.reject(new Error('Region unavailable')))
-    .then(data => { if (data && typeof data.country === 'string') show(arabicCountries.has(data.country.toUpperCase()) ? 'ar' : 'other'); })
+  show(language === 'ar' || (navigator.language || '').startsWith('ar'));
+  fetch(api + '/api/region', {cache:'no-store'})
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(data => { if (typeof data.country === 'string') show(countries.has(data.country.toUpperCase())); })
     .catch(() => {});
 })();

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Изображение в Промпт | Бесплатный AI Генератор - ImageDescriber</title>
-    <meta name="description" content="Бесплатно конвертируйте изображения в AI промпты. Генератор для Midjourney, Stable Diffusion и DALL-E. Без регистрации.">
-    <meta name="keywords" content="изображение в промпт, генератор промптов, AI описание изображений, Midjourney промпт, Stable Diffusion">
+    <title>Изображение в промпт | ImageToPrompt</title>
+    <meta name="description" content="Получите редактируемое описание изображения. Бесплатная демоверсия без регистрации: 3 преобразования на IP в день.">
+
 
     <link rel="canonical" href="https://image-to-prompt.github.io/ru/">
     <link rel="alternate" hreflang="en" href="https://image-to-prompt.github.io/">
@@ -48,7 +48,7 @@
         .progress-bar.active { display: block; }
         .progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.3s; }
     </style>
-<link rel="stylesheet" href="/assets/theme.css?v=2">
+<link rel="stylesheet" href="/assets/theme.css?v=3">
 </head>
 <body>
     <div class="lang-switcher">
@@ -60,12 +60,12 @@
     </div>
 
     <section class="hero">
-        <h1><span class="highlight">Изображение в Промпт</span><br>Бесплатный AI Генератор</h1>
+        <h1>Изображение в промпт</h1>
         <p>Создайте редактируемое описание изображения для генератора AI. Без регистрации. Демо: 3 запроса с одного IP в день.</p>
 
         <div class="upload-zone" id="uploadZone">
             <input type="file" id="fileInput" accept="image/*" style="display:none">
-            <div class="upload-icon">📤</div>
+
             <div><strong>Перетащите изображение или нажмите</strong></div>
             <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP • Макс 10MB</div>
             <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
@@ -75,7 +75,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <strong>🎯 Сгенерированный Промпт</strong>
                 <div>
-                    <button class="btn btn-primary" onclick="copyPrompt()">📋 Копировать</button>
+                    <button class="btn btn-primary" onclick="copyPrompt()">Копировать</button>
                     <button class="btn" onclick="reset()" style="background: var(--border); color: var(--text); margin-left: 0.5rem;">🔄 Новое</button>
                 </div>
             </div>
@@ -83,39 +83,16 @@
         </div>
     </section>
 
-    <section class="features">
-        <h2>Почему использовать наш <span class="highlight">генератор</span>?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-                <h3>Мгновенные Результаты</h3>
-                <p>ИИ создаёт редактируемое описание. Время обработки зависит от нагрузки.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                <h3>Мульти-Платформа</h3>
-                <p>Совместим с Midjourney, Stable Diffusion, DALL-E и Flux AI.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
-                <h3>100% Бесплатно</h3>
-                <p>Без карты и регистрации. Демо: 3 запроса с одного IP в день.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-                <h3>Приватность Прежде Всего</h3>
-                <p>Изображение отправляется в API для анализа. Не загружайте личные файлы без разрешения.</p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <p>© 2025 Image to Prompt. Бесплатный генератор Изображение в Промпт.</p>
+
+    <section class="example" id="examples"><div><p class="eyebrow">Практический пример</p><h2>От изображения к точному описанию</h2><img src="/assets/ceramic-mug.webp" width="960" height="640" loading="lazy" alt="От изображения к точному описанию"><p class="upload-hint">Изображение создано ИИ. Описание отредактировано вручную и не является сохранённым ответом инструмента.</p></div><div><p>Светло-голубая керамическая чашка с кофе на деревянном столе у окна. Под чашкой лежит кремовая льняная салфетка. Естественный свет слева, мягкие тени и заметная фактура керамики и дерева.</p><p><a href="/blog/image-to-prompt-guide/" hreflang="en">Как улучшить описание (English)</a></p></div></section><p class="privacy-note">Изображение отправляется в API для анализа. <a href="/blog/self-host-image-to-prompt/" hreflang="en">Запустить проект со своими ключами (English)</a></p>
+<footer>
+        <p>© 2026 Image to Prompt. Бесплатный генератор Изображение в Промпт.</p>
     </footer>
 
     <div class="toast" id="toast"></div>
 
-    <script src="/brand-promo.js" defer></script>
+    <script src="/brand-promo.js?v=3" defer></script>
     <script>
         const API_BASE_URL = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
         const MAX_DIMENSION = 1024;

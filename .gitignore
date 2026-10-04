@@ -5,3 +5,6 @@
 .wrangler/
 *.log
 __pycache__/
+.gstack/
+
+**/wrangler.local.toml

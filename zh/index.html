@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片转提示词 | 免费AI生成器 - ImageDescriber</title>
-    <meta name="description" content="免费将图片转换为AI提示词。为Midjourney、Stable Diffusion和DALL-E生成详细提示词。无需注册。">
-    <meta name="keywords" content="图片转提示词, 提示词生成器, AI图片描述, Midjourney提示词, Stable Diffusion提示词">
+    <title>图片转提示词 | ImageToPrompt</title>
+    <meta name="description" content="将参考图片转换为可编辑的描述。无需注册，免费演示每个 IP 每天可转换 3 次。">
+
 
     <link rel="canonical" href="https://image-to-prompt.github.io/zh/">
     <link rel="alternate" hreflang="en" href="https://image-to-prompt.github.io/">
@@ -48,7 +48,7 @@
         .progress-bar.active { display: block; }
         .progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.3s; }
     </style>
-<link rel="stylesheet" href="/assets/theme.css?v=2">
+<link rel="stylesheet" href="/assets/theme.css?v=3">
 </head>
 <body>
     <div class="lang-switcher">
@@ -60,12 +60,12 @@
     </div>
 
     <section class="hero">
-        <h1><span class="highlight">图片转提示词</span><br>免费AI生成器</h1>
+        <h1>图片转提示词</h1>
         <p>将图片转换为可编辑的视觉描述，用作 AI 绘图提示词。无需注册。公开演示版每个 IP 每天可转换 3 次。</p>
 
         <div class="upload-zone" id="uploadZone">
             <input type="file" id="fileInput" accept="image/*" style="display:none">
-            <div class="upload-icon">📤</div>
+
             <div><strong>拖放图片到这里或点击上传</strong></div>
             <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP • 最大 10MB</div>
             <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
@@ -75,7 +75,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <strong>🎯 生成的提示词</strong>
                 <div>
-                    <button class="btn btn-primary" onclick="copyPrompt()">📋 复制</button>
+                    <button class="btn btn-primary" onclick="copyPrompt()">复制</button>
                     <button class="btn" onclick="reset()" style="background: var(--border); color: var(--text); margin-left: 0.5rem;">🔄 新建</button>
                 </div>
             </div>
@@ -83,39 +83,16 @@
         </div>
     </section>
 
-    <section class="features">
-        <h2>为什么使用我们的<span class="highlight">生成器</span>？</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-                <h3>即时结果</h3>
-                <p>AI 分析图片并生成可编辑的描述。处理时间取决于服务负载。</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                <h3>多平台支持</h3>
-                <p>兼容Midjourney、Stable Diffusion、DALL-E和Flux AI。</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
-                <h3>100%免费</h3>
-                <p>无需信用卡或注册；公开演示版每个 IP 每天限 3 次。</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-                <h3>隐私优先</h3>
-                <p>图片会发送到配置的 API 进行分析。请勿上传无权共享的敏感图片。</p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <p>© 2025 Image to Prompt. 免费图片转提示词生成器。</p>
+
+    <section class="example" id="examples"><div><p class="eyebrow">实际示例</p><h2>从图片到清晰的描述</h2><img src="/assets/ceramic-mug.webp" width="960" height="640" loading="lazy" alt="从图片到清晰的描述"><p class="upload-hint">AI 生成的参考图。描述经过人工编辑，并非保存的工具输出。</p></div><div><p>窗边木桌上放着一个盛有咖啡的浅蓝色陶瓷杯，杯下是一块奶油色亚麻餐巾。自然光从左侧照入，阴影柔和，陶瓷和木材的纹理清晰可见。</p><p><a href="/blog/image-to-prompt-guide/" hreflang="en">如何改进图像描述 (English)</a></p></div></section><p class="privacy-note">图片会发送到 API 进行分析。 <a href="/blog/self-host-image-to-prompt/" hreflang="en">使用自己的凭据部署项目 (English)</a></p>
+<footer>
+        <p>© 2026 Image to Prompt. 免费图片转提示词生成器。</p>
     </footer>
 
     <div class="toast" id="toast"></div>
 
-    <script src="/brand-promo.js" defer></script>
+    <script src="/brand-promo.js?v=3" defer></script>
     <script>
         const API_BASE_URL = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
         const MAX_DIMENSION = 1024;

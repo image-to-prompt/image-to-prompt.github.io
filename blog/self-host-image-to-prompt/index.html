@@ -12,7 +12,7 @@
   <meta property="og:url" content="https://image-to-prompt.github.io/blog/self-host-image-to-prompt/">
   <style>body{margin:0;background:#0f172a;color:#f8fafc;font:17px/1.7 system-ui,sans-serif}header,main,footer{max-width:780px;margin:auto;padding:1.5rem}header{display:flex;justify-content:space-between;gap:1rem;align-items:center}a{color:#a5b4fc}nav{display:flex;gap:1rem;flex-wrap:wrap}h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15}h2{margin-top:2.5rem}p,li{color:#cbd5e1}strong{color:#fff}pre{overflow:auto;background:#1e293b;padding:1rem;border-radius:10px}code{font-size:.9em}footer{border-top:1px solid #334155}</style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Self-Host Image to Prompt With Your Own AI Credentials","mainEntityOfPage":"https://image-to-prompt.github.io/blog/self-host-image-to-prompt/","author":{"@type":"Organization","name":"ImageToPrompt"}}</script>
-<link rel="stylesheet" href="/assets/theme.css?v=2">
+<link rel="stylesheet" href="/assets/theme.css?v=3">
 </head>
 <body>
 <header><a href="/">← ImageToPrompt</a><nav><a href="/#upload">Try the tool</a><a href="/blog/image-to-prompt-guide/">Prompt guide</a><a href="https://github.com/image-to-prompt/image-to-prompt.github.io">GitHub</a></nav></header>
@@ -23,15 +23,16 @@
   <h2>Get the code</h2>
   <pre><code>git clone https://github.com/image-to-prompt/image-to-prompt.github.io.git
 cd image-to-prompt.github.io</code></pre>
-  <p>See the repository <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">README</a> for the current deployment steps. If your checkout only contains the static page, use this project's backend source alongside it.</p>
+  <p>See the repository <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">README</a> for the current deployment steps. The repository includes the frontend and both backend options.</p>
   <h2>Option A: Cloudflare Workers AI</h2>
-  <p>Create a Cloudflare account, install dependencies in <code>backend/cf-worker</code>, create a KV namespace for rate limiting, and replace the account and namespace IDs in <code>wrangler.toml</code> with your own IDs. The Worker uses a Cloudflare AI binding, so you do not put an API key in the browser.</p>
+  <p>Create a Cloudflare account, install dependencies in <code>backend/cf-worker</code>, create a KV namespace for rate limiting, and copy <code>wrangler.toml</code> to <code>wrangler.local.toml</code>, then set your own account and namespace IDs in that local file. The Worker uses a Cloudflare AI binding, so you do not put an API key in the browser.</p>
   <pre><code>cd backend/cf-worker
 npm install
 npx wrangler login
-npx wrangler kv namespace create IMAGE_TO_PROMPT_KV
-# Set your KV namespace ID in wrangler.toml
-npx wrangler deploy</code></pre>
+npx wrangler kv:namespace create IMAGE_TO_PROMPT_KV
+cp wrangler.toml wrangler.local.toml
+# Set your own account_id and KV namespace ID in wrangler.local.toml
+npx wrangler deploy --config wrangler.local.toml</code></pre>
   <p>Set the Worker AI binding named <code>AI</code> as described in the <a href="https://github.com/image-to-prompt/image-to-prompt.github.io/blob/main/backend/cf-worker/SETUP.md">Worker setup guide</a>. Provider availability and charges depend on your Cloudflare account.</p>
   <h2>Option B: Docker with an OpenAI compatible API</h2>
   <p>In <code>backend/docker</code>, copy <code>.env.example</code> to <code>.env</code>, set your provider key and model, then start Docker Compose. Keep <code>.env</code> private.</p>
@@ -49,7 +50,7 @@ docker compose up -d --build</code></pre>
   <p>For a working prompt workflow, see the <a href="/blog/image-to-prompt-guide/">image to prompt guide</a>.</p>
   <p>ImageToPrompt is made by the team behind <a data-maker-link href="https://upilote.com/">uPilote</a>.</p>
 </main>
-<footer><a href="/">Try ImageToPrompt</a> · <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">View source</a></footer>
-<script src="/brand-promo.js" defer></script>
+<footer><p>© 2026 ImageToPrompt</p><a href="/">Try ImageToPrompt</a> · <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">View source</a></footer>
+<script src="/brand-promo.js?v=3" defer></script>
 </body>
 </html>

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Imagen a Prompt | Generador AI Gratis - ImageDescriber</title>
-    <meta name="description" content="Convierte cualquier imagen a prompt de AI gratis. Generador de prompts para Midjourney, Stable Diffusion y DALL-E. Sin registro.">
-    <meta name="keywords" content="imagen a prompt, generador de prompts, ai descripcion imagen, prompt midjourney, prompt stable diffusion">
+    <title>Imagen a prompt | ImageToPrompt</title>
+    <meta name="description" content="Convierte una imagen de referencia en una descripción editable. Demo gratuita sin registro: 3 conversiones por IP al día.">
+
 
     <!-- Canonical & Hreflang -->
     <link rel="canonical" href="https://image-to-prompt.github.io/es/">
@@ -49,7 +49,7 @@
         .progress-bar.active { display: block; }
         .progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.3s; }
     </style>
-<link rel="stylesheet" href="/assets/theme.css?v=2">
+<link rel="stylesheet" href="/assets/theme.css?v=3">
 </head>
 <body>
     <!-- Language Switcher -->
@@ -62,12 +62,12 @@
     </div>
 
     <section class="hero">
-        <h1><span class="highlight">Imagen a Prompt</span><br>Generador AI Gratis</h1>
+        <h1>Imagen a prompt</h1>
         <p>Describe una imagen para crear un prompt editable. Sin registro. La demo permite 3 conversiones por IP al día.</p>
 
         <div class="upload-zone" id="uploadZone">
             <input type="file" id="fileInput" accept="image/*" style="display:none">
-            <div class="upload-icon">📤</div>
+
             <div><strong>Suelta tu imagen aquí o haz clic</strong></div>
             <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP • Máx 10MB</div>
             <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
@@ -77,7 +77,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                 <strong>🎯 Prompt Generado</strong>
                 <div>
-                    <button class="btn btn-primary" onclick="copyPrompt()">📋 Copiar</button>
+                    <button class="btn btn-primary" onclick="copyPrompt()">Copiar</button>
                     <button class="btn" onclick="reset()" style="background: var(--border); color: var(--text); margin-left: 0.5rem;">🔄 Nueva</button>
                 </div>
             </div>
@@ -85,39 +85,16 @@
         </div>
     </section>
 
-    <section class="features">
-        <h2>¿Por qué usar nuestro <span class="highlight">generador</span>?</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-                <h3>Resultados Instantáneos</h3>
-                <p>La IA genera una descripción editable. El tiempo depende de la demanda.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                <h3>Multi-Plataforma</h3>
-                <p>Compatible con Midjourney, Stable Diffusion, DALL-E y Flux AI.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
-                <h3>100% Gratis</h3>
-                <p>Sin tarjeta ni registro. La demo permite 3 conversiones por IP al día.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-                <h3>Privacidad Primero</h3>
-                <p>La imagen se envía a la API para analizarla. No subas imágenes sensibles sin permiso.</p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <p>© 2025 Image to Prompt. Generador gratuito de Imagen a Prompt.</p>
+
+    <section class="example" id="examples"><div><p class="eyebrow">Ejemplo práctico</p><h2>De la imagen a una descripción clara</h2><img src="/assets/ceramic-mug.webp" width="960" height="640" loading="lazy" alt="De la imagen a una descripción clara"><p class="upload-hint">Referencia generada con IA. Descripción editada manualmente; no es una respuesta guardada de la herramienta.</p></div><div><p>Una taza de cerámica azul claro con café sobre una mesa de madera junto a una ventana. Una servilleta de lino crema debajo de la taza, luz natural desde la izquierda, sombras suaves y textura visible en la cerámica y la madera.</p><p><a href="/blog/image-to-prompt-guide/" hreflang="en">Guía para mejorar la descripción (English)</a></p></div></section><p class="privacy-note">La imagen se envía a la API para analizarla. <a href="/blog/self-host-image-to-prompt/" hreflang="en">Ejecuta el proyecto con tus propias credenciales (English)</a></p>
+<footer>
+        <p>© 2026 Image to Prompt. Generador gratuito de Imagen a Prompt.</p>
     </footer>
 
     <div class="toast" id="toast"></div>
 
-    <script src="/brand-promo.js" defer></script>
+    <script src="/brand-promo.js?v=3" defer></script>
     <script>
         const API_BASE_URL = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
         const MAX_DIMENSION = 1024;

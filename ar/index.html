@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الصورة إلى برومبت | مولد AI مجاني - ImageDescriber</title>
-    <meta name="description" content="حول أي صورة إلى برومبت AI مجاناً. مولد برومبت لـ Midjourney و Stable Diffusion و DALL-E. بدون تسجيل.">
-    <meta name="keywords" content="الصورة إلى برومبت, مولد البرومبت, وصف الصورة AI, برومبت ميدجرني, برومبت ستيبل ديفيوجن">
+    <title>الصورة إلى برومبت | ImageToPrompt</title>
+    <meta name="description" content="حوّل صورة مرجعية إلى وصف قابل للتعديل. التجربة مجانية دون تسجيل: 3 تحويلات لكل عنوان IP يومياً.">
+
 
     <link rel="canonical" href="https://image-to-prompt.github.io/ar/">
     <link rel="alternate" hreflang="en" href="https://image-to-prompt.github.io/">
@@ -48,7 +48,7 @@
         .progress-bar.active { display: block; }
         .progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.3s; }
     </style>
-<link rel="stylesheet" href="/assets/theme.css?v=2">
+<link rel="stylesheet" href="/assets/theme.css?v=3">
 </head>
 <body>
     <div class="lang-switcher">
@@ -60,14 +60,14 @@
     </div>
 
     <section class="hero">
-        <h1><span class="highlight">الصورة إلى برومبت</span><br>مولد AI مجاني</h1>
+        <h1>الصورة إلى برومبت</h1>
         <p>حوّل الصورة إلى وصف قابل للتعديل لتوليد الصور. بدون تسجيل. النسخة العامة تتيح 3 تحويلات لكل عنوان IP يومياً.</p>
 
         <div class="upload-zone" id="uploadZone">
             <input type="file" id="fileInput" accept="image/*" style="display:none">
-            <div class="upload-icon">📤</div>
+
             <div><strong>اسحب الصورة هنا أو انقر للرفع</strong></div>
-            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP •最大 10MB</div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP •الحد الأقصى 10 ميغابايت</div>
             <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
         </div>
 
@@ -75,7 +75,7 @@
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-direction: row-reverse;">
                 <strong>🎯 البرومبت المولد</strong>
                 <div>
-                    <button class="btn btn-primary" onclick="copyPrompt()">📋 نسخ</button>
+                    <button class="btn btn-primary" onclick="copyPrompt()">نسخ الوصف</button>
                     <button class="btn" onclick="reset()" style="background: var(--border); color: var(--text); margin-right: 0.5rem;">🔄 جديد</button>
                 </div>
             </div>
@@ -83,39 +83,16 @@
         </div>
     </section>
 
-    <section class="features">
-        <h2>لماذا تستخدم <span class="highlight">مولدنا</span>؟</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
-                <h3>نتائج فورية</h3>
-                <p>يحلل الذكاء الاصطناعي الصورة ويعطيك وصفاً قابلاً للتعديل. يعتمد الوقت على ضغط الخدمة.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
-                <h3>متعدد المنصات</h3>
-                <p>متوافق مع Midjourney و Stable Diffusion و DALL-E و Flux AI.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
-                <h3>100% مجاني</h3>
-                <p>بدون بطاقة أو تسجيل. النسخة العامة تتيح 3 تحويلات لكل عنوان IP يومياً.</p>
-            </div>
-            <div class="feature-card">
-                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
-                <h3>الخصوصية أولاً</h3>
-                <p>تُرسل الصورة إلى واجهة API للتحليل. لا ترفع صوراً حساسة دون إذن.</p>
-            </div>
-        </div>
-    </section>
 
-    <footer>
-        <p>© 2025 Image to Prompt. مولد الصورة إلى برومبت المجاني.</p>
+
+    <section class="example" id="examples"><div><p class="eyebrow">مثال عملي</p><h2>من الصورة إلى وصف واضح</h2><img src="/assets/ceramic-mug.webp" width="960" height="640" loading="lazy" alt="من الصورة إلى وصف واضح"><p class="upload-hint">صورة مرجعية مولدة بالذكاء الاصطناعي. الوصف مثال محرر يدوياً، وليس نتيجة محفوظة من الأداة.</p></div><div><p>كوب خزفي أزرق فاتح يحتوي على القهوة، فوق طاولة خشبية بجوار نافذة. منديل كتاني بلون كريمي تحت الكوب، وضوء طبيعي من اليسار، وظلال ناعمة، وتفاصيل واضحة للخزف والخشب.</p><p><a href="/blog/image-to-prompt-guide/" hreflang="en">دليل تحسين الوصف (English)</a></p></div></section><p class="privacy-note">تُرسل الصورة إلى واجهة الخدمة لتحليلها. <a href="/blog/self-host-image-to-prompt/" hreflang="en">شغّل المشروع بمفاتيحك الخاصة (English)</a></p>
+<footer>
+        <p>© 2026 Image to Prompt. مولد الصورة إلى برومبت المجاني.</p>
     </footer>
 
     <div class="toast" id="toast"></div>
 
-    <script src="/brand-promo.js" defer></script>
+    <script src="/brand-promo.js?v=3" defer></script>
     <script>
         const API_BASE_URL = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
         const MAX_DIMENSION = 1024;
