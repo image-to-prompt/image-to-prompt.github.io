@@ -1,0 +1,16 @@
+name = "image-to-prompt-api"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Use your own Cloudflare account and namespace in an ignored local config.
+[ai]
+binding = "AI"
+
+[[kv_namespaces]]
+binding = "IMAGE_TO_PROMPT_KV"
+id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+
+[vars]
+RATE_LIMIT = "3"
+RATE_LIMIT_WINDOW = "86400"

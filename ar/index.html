@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصورة إلى برومبت | مولد AI مجاني - ImageDescriber</title>
+    <meta name="description" content="حول أي صورة إلى برومبت AI مجاناً. مولد برومبت لـ Midjourney و Stable Diffusion و DALL-E. بدون تسجيل.">
+    <meta name="keywords" content="الصورة إلى برومبت, مولد البرومبت, وصف الصورة AI, برومبت ميدجرني, برومبت ستيبل ديفيوجن">
+
+    <link rel="canonical" href="https://image-to-prompt.github.io/ar/">
+    <link rel="alternate" hreflang="en" href="https://image-to-prompt.github.io/">
+    <link rel="alternate" hreflang="es" href="https://image-to-prompt.github.io/es/">
+    <link rel="alternate" hreflang="zh" href="https://image-to-prompt.github.io/zh/">
+    <link rel="alternate" hreflang="ru" href="https://image-to-prompt.github.io/ru/">
+    <link rel="alternate" hreflang="ar" href="https://image-to-prompt.github.io/ar/">
+    <link rel="alternate" hreflang="x-default" href="https://image-to-prompt.github.io/">
+
+    <style>
+        :root { --primary: #6366f1; --primary-dark: #4f46e5; --secondary: #8b5cf6; --accent: #ec4899; --bg-dark: #0f172a; --bg-card: #1e293b; --text: #f8fafc; --text-muted: #94a3b8; --border: #334155; --success: #10b981; --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans Arabic', sans-serif; background: var(--bg-dark); color: var(--text); line-height: 1.6; }
+        .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 6rem 2rem 4rem; text-align: center; }
+        .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; line-height: 1.15; margin-bottom: 1rem; }
+        .highlight { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin-bottom: 2rem; font-size: 1.1rem; }
+        .upload-zone { border: 2px dashed var(--border); border-radius: 20px; padding: 3rem 2rem; text-align: center; background: var(--bg-card); cursor: pointer; transition: all 0.3s; max-width: 500px; margin: 0 auto 2rem; }
+        .upload-zone:hover { border-color: var(--primary); }
+        .upload-icon { font-size: 3rem; margin-bottom: 0.5rem; }
+        .btn { padding: 0.75rem 1.5rem; border-radius: 10px; font-weight: 600; cursor: pointer; border: none; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; }
+        .btn-primary { background: var(--gradient); color: white; }
+        .result-box { background: var(--bg-card); border-radius: 16px; padding: 1.5rem; border: 1px solid var(--border); max-width: 700px; margin: 2rem auto; display: none; }
+        .result-box.active { display: block; }
+        .prompt-output { background: var(--bg-dark); border-radius: 12px; padding: 1rem; font-family: monospace; font-size: 0.9rem; white-space: pre-wrap; word-break: break-word; border: 1px solid var(--border); direction: ltr; text-align: left; }
+        .lang-switcher { position: fixed; top: 1rem; left: 1rem; z-index: 1000; display: flex; gap: 0.5rem; }
+        .lang-switcher a { color: var(--text-muted); text-decoration: none; padding: 0.35rem 0.6rem; border-radius: 6px; font-size: 0.85rem; }
+        .lang-switcher a:hover, .lang-switcher a.active { background: var(--primary); color: white; }
+        .features { padding: 4rem 2rem; text-align: center; }
+        .features h2 { font-size: 2rem; margin-bottom: 2rem; }
+        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+        .feature-card { background: var(--bg-card); padding: 1.5rem; border-radius: 16px; border: 1px solid var(--border); }
+        .feature-card h3 { margin-bottom: 0.5rem; }
+        .feature-card p { color: var(--text-muted); font-size: 0.9rem; }
+        footer { text-align: center; padding: 2rem; color: var(--text-muted); border-top: 1px solid var(--border); margin-top: 4rem; }
+        .toast { position: fixed; bottom: 1.5rem; left: 1.5rem; background: var(--success); color: white; padding: 0.875rem 1.25rem; border-radius: 10px; font-weight: 600; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 10000; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 1rem; display: none; }
+        .progress-bar.active { display: block; }
+        .progress-fill { height: 100%; background: var(--gradient); width: 0%; transition: width 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <a href="/">EN</a>
+        <a href="/es/">ES</a>
+        <a href="/zh/">ZH</a>
+        <a href="/ru/">RU</a>
+        <a href="/ar/" class="active">AR</a>
+    </div>
+
+    <section class="hero">
+        <h1><span class="highlight">الصورة إلى برومبت</span><br>مولد AI مجاني</h1>
+        <p>حوّل الصورة إلى وصف قابل للتعديل لتوليد الصور. بدون تسجيل. النسخة العامة تتيح 3 تحويلات لكل عنوان IP يومياً.</p>
+
+        <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" accept="image/*" style="display:none">
+            <div class="upload-icon">📤</div>
+            <div><strong>اسحب الصورة هنا أو انقر للرفع</strong></div>
+            <div style="color: var(--text-muted); font-size: 0.85rem; margin-top: 0.5rem;">JPG, PNG, WebP •最大 10MB</div>
+            <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-direction: row-reverse;">
+                <strong>🎯 البرومبت المولد</strong>
+                <div>
+                    <button class="btn btn-primary" onclick="copyPrompt()">📋 نسخ</button>
+                    <button class="btn" onclick="reset()" style="background: var(--border); color: var(--text); margin-right: 0.5rem;">🔄 جديد</button>
+                </div>
+            </div>
+            <div class="prompt-output" id="promptOutput"></div>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>لماذا تستخدم <span class="highlight">مولدنا</span>؟</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">⚡</div>
+                <h3>نتائج فورية</h3>
+                <p>يحلل الذكاء الاصطناعي الصورة ويعطيك وصفاً قابلاً للتعديل. يعتمد الوقت على ضغط الخدمة.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+                <h3>متعدد المنصات</h3>
+                <p>متوافق مع Midjourney و Stable Diffusion و DALL-E و Flux AI.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💰</div>
+                <h3>100% مجاني</h3>
+                <p>بدون بطاقة أو تسجيل. النسخة العامة تتيح 3 تحويلات لكل عنوان IP يومياً.</p>
+            </div>
+            <div class="feature-card">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔒</div>
+                <h3>الخصوصية أولاً</h3>
+                <p>تُرسل الصورة إلى واجهة API للتحليل. لا ترفع صوراً حساسة دون إذن.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 Image to Prompt. مولد الصورة إلى برومبت المجاني.</p>
+    </footer>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="/brand-promo.js" defer></script>
+    <script>
+        const API_BASE_URL = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
+        const MAX_DIMENSION = 1024;
+        const JPEG_QUALITY = 0.85;
+
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const resultBox = document.getElementById('resultBox');
+        const promptOutput = document.getElementById('promptOutput');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const toast = document.getElementById('toast');
+
+        uploadZone.addEventListener('click', () => fileInput.click());
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.style.borderColor = 'var(--primary)'; });
+        uploadZone.addEventListener('dragleave', () => { uploadZone.style.borderColor = 'var(--border)'; });
+        uploadZone.addEventListener('drop', (e) => { e.preventDefault(); uploadZone.style.borderColor = 'var(--border)'; if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); });
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) handleFile(e.target.files[0]); });
+
+        async function optimizeImage(file) {
+            if (file.size < 2 * 1024 * 1024 && file.type === 'image/jpeg') return file;
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const url = URL.createObjectURL(file);
+                img.onload = () => {
+                    URL.revokeObjectURL(url);
+                    let w = img.width, h = img.height;
+                    if (w > MAX_DIMENSION || h > MAX_DIMENSION) {
+                        if (w > h) { h = Math.round((h * MAX_DIMENSION) / w); w = MAX_DIMENSION; }
+                        else { w = Math.round((w * MAX_DIMENSION) / h); h = MAX_DIMENSION; }
+                    }
+                    const canvas = document.createElement('canvas');
+                    canvas.width = w; canvas.height = h;
+                    const ctx = canvas.getContext('2d');
+                    ctx.imageSmoothingQuality = 'high';
+                    ctx.drawImage(img, 0, 0, w, h);
+                    canvas.toBlob((blob) => {
+                        if (blob) resolve(new File([blob], file.name.replace(/\.[^/.]+$/, '') + '.jpg', { type: 'image/jpeg' }));
+                        else reject(new Error('Failed'));
+                    }, 'image/jpeg', JPEG_QUALITY);
+                };
+                img.onerror = () => reject(new Error('Failed'));
+                img.src = url;
+            });
+        }
+
+        async function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+            if (!validTypes.includes(file.type)) { showToast('JPG أو PNG أو WebP فقط'); return; }
+            if (file.size > 10 * 1024 * 1024) { showToast('الحد الأقصى 10MB'); return; }
+
+            progressBar.classList.add('active');
+            resultBox.classList.remove('active');
+
+            try {
+                const optFile = await optimizeImage(file);
+                let progress = 0;
+                const interval = setInterval(() => { progress += 10; if (progress > 80) progress = 80; progressFill.style.width = progress + '%'; }, 200);
+
+                const formData = new FormData();
+                formData.append('image', optFile);
+                const res = await fetch(`${API_BASE_URL}/api/convert`, { method: 'POST', body: formData });
+                const data = await res.json();
+
+                clearInterval(interval);
+                progressFill.style.width = '100%';
+
+                if (!res.ok) throw new Error(data.message);
+
+                promptOutput.textContent = data.prompt;
+                resultBox.classList.add('active');
+                resultBox.scrollIntoView({ behavior: 'smooth' });
+                if (data.remaining !== undefined) setTimeout(() => showToast(`متبقي ${data.remaining} تحويلات اليوم`), 1000);
+            } catch (err) {
+                showToast(err.message || 'خطأ في المعالجة');
+            } finally {
+                setTimeout(() => { progressBar.classList.remove('active'); progressFill.style.width = '0%'; }, 500);
+            }
+        }
+
+        function copyPrompt() {
+            navigator.clipboard.writeText(promptOutput.textContent).then(() => showToast('تم نسخ البرومبت!'));
+        }
+
+        function reset() {
+            resultBox.classList.remove('active');
+            fileInput.value = '';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+    </script>
+</body>
+</html>

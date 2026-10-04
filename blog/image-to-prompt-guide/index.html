@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to Turn an Image Into an AI Prompt: A Practical Guide</title>
+  <meta name="description" content="Learn how to turn a reference photo or artwork into a useful AI image prompt, what an image describer can miss, and how to refine the result for your generator.">
+  <link rel="canonical" href="https://image-to-prompt.github.io/blog/image-to-prompt-guide/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to Turn an Image Into an AI Prompt">
+  <meta property="og:description" content="A practical image to prompt workflow with examples and limitations.">
+  <meta property="og:url" content="https://image-to-prompt.github.io/blog/image-to-prompt-guide/">
+  <style>body{margin:0;background:#0f172a;color:#f8fafc;font:17px/1.7 system-ui,sans-serif}header,main,footer{max-width:780px;margin:auto;padding:1.5rem}header{display:flex;justify-content:space-between;gap:1rem;align-items:center}a{color:#a5b4fc}nav{display:flex;gap:1rem;flex-wrap:wrap}h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15}h2{margin-top:2.5rem}p,li{color:#cbd5e1}strong{color:#fff}.note{padding:1rem 1.25rem;border:1px solid #475569;border-radius:12px;background:#1e293b}footer{border-top:1px solid #334155}code{background:#1e293b;padding:.1rem .3rem;border-radius:3px}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Turn an Image Into an AI Prompt: A Practical Guide","mainEntityOfPage":"https://image-to-prompt.github.io/blog/image-to-prompt-guide/","author":{"@type":"Organization","name":"ImageToPrompt"}}</script>
+</head>
+<body>
+<header><a href="/">← ImageToPrompt</a><nav><a href="/#upload">Try the tool</a><a href="/blog/self-host-image-to-prompt/">Self-host</a><a href="https://github.com/image-to-prompt/image-to-prompt.github.io">GitHub</a></nav></header>
+<main>
+  <p>Image to Prompt guide</p>
+  <h1>How to turn an image into an AI prompt</h1>
+  <p>An image-to-prompt tool gives you a draft description of a reference image. The useful part happens when you decide which details to keep, change, or omit. Here is a simple workflow you can use with photos, illustrations, and design references.</p>
+  <h2>1. Start with a clear reference</h2>
+  <p>Choose an image where the main subject and composition are visible. Crop away UI, watermarks, or unrelated surroundings if they are not part of the result you want. Our <a href="/#upload">free image to prompt generator</a> accepts one JPG, PNG, or WebP image up to 10 MB. The hosted demo allows 3 conversions per IP per day.</p>
+  <h2>2. Generate a visual description</h2>
+  <p>Upload the image and read the returned text as an observation, not a reconstruction of the original creator's prompt. The model may identify a subject, style, colors, lighting, and camera angle. It can also omit details or guess incorrectly, especially when the reference is abstract or crowded.</p>
+  <div class="note"><strong>Example:</strong> For a photo of a ceramic mug on a wooden table near a window, a useful draft might be: “A handmade blue ceramic mug on a warm wooden table, soft side light from a window, shallow depth of field, quiet editorial product photography.” Check every detail against your reference.</div>
+  <h2>3. Make the prompt specific to your goal</h2>
+  <p>Keep the details that drive the visual result: subject, setting, composition, medium, color, and lighting. Replace generic phrases with concrete ones. If you want a new image rather than a close imitation, change one or two elements deliberately.</p>
+  <p>For example, to develop a campaign concept from the mug reference, you might change the setting to a cafe table and add “space on the right for a headline.” That instruction is more useful than adding vague quality words.</p>
+  <h2>4. Adapt it to your image model</h2>
+  <p>This tool returns a general description. It does not automatically add Midjourney parameters, Stable Diffusion weights, negative prompts, or model settings. Add those in the image generator you actually use. Test a few generations and revise the prompt based on the output, since different models interpret the same text differently.</p>
+  <h2>5. Respect your reference</h2>
+  <p>Use images you have permission to upload. A generated description does not grant rights to a reference image, brand, or person's likeness. If the image includes private or sensitive material, use an appropriate local or self-hosted workflow instead of the public demo.</p>
+  <h2>Want to run it yourself?</h2>
+  <p>The project source includes a static frontend and two backend options. Read the <a href="/blog/self-host-image-to-prompt/">self-hosting guide</a> to connect your own account while keeping credentials on the server.</p>
+  <div class="note"><strong>From the maker of this tool:</strong> A visual prompt can be the start of a product idea. <a data-maker-link href="https://upilote.com/">uPilote</a> helps you take the next step.</div>
+</main>
+<footer><a href="/">Try ImageToPrompt</a> · <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">View source</a></footer>
+<script src="/brand-promo.js" defer></script>
+</body>
+</html>

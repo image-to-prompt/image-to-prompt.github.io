@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Self-Host Image to Prompt With Your Own AI Credentials</title>
+  <meta name="description" content="Run the open source image to prompt project with Cloudflare Workers AI or a Docker backend using your own provider credentials. Setup and security notes.">
+  <link rel="canonical" href="https://image-to-prompt.github.io/blog/self-host-image-to-prompt/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Self-Host Image to Prompt With Your Own AI Credentials">
+  <meta property="og:description" content="Deploy the image to prompt frontend and backend under your own account.">
+  <meta property="og:url" content="https://image-to-prompt.github.io/blog/self-host-image-to-prompt/">
+  <style>body{margin:0;background:#0f172a;color:#f8fafc;font:17px/1.7 system-ui,sans-serif}header,main,footer{max-width:780px;margin:auto;padding:1.5rem}header{display:flex;justify-content:space-between;gap:1rem;align-items:center}a{color:#a5b4fc}nav{display:flex;gap:1rem;flex-wrap:wrap}h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15}h2{margin-top:2.5rem}p,li{color:#cbd5e1}strong{color:#fff}pre{overflow:auto;background:#1e293b;padding:1rem;border-radius:10px}code{font-size:.9em}footer{border-top:1px solid #334155}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Self-Host Image to Prompt With Your Own AI Credentials","mainEntityOfPage":"https://image-to-prompt.github.io/blog/self-host-image-to-prompt/","author":{"@type":"Organization","name":"ImageToPrompt"}}</script>
+</head>
+<body>
+<header><a href="/">← ImageToPrompt</a><nav><a href="/#upload">Try the tool</a><a href="/blog/image-to-prompt-guide/">Prompt guide</a><a href="https://github.com/image-to-prompt/image-to-prompt.github.io">GitHub</a></nav></header>
+<main>
+  <p>Open source setup</p>
+  <h1>Self-host Image to Prompt with your own credentials</h1>
+  <p>The project has a static HTML frontend and two backend choices. The public demo calls the project's Cloudflare Worker. A self-hosted copy should call <em>your</em> backend so its AI usage, limits, and data handling are under your control.</p>
+  <h2>Get the code</h2>
+  <pre><code>git clone https://github.com/image-to-prompt/image-to-prompt.github.io.git
+cd image-to-prompt.github.io</code></pre>
+  <p>See the repository <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">README</a> for the current deployment steps. If your checkout only contains the static page, use this project's backend source alongside it.</p>
+  <h2>Option A: Cloudflare Workers AI</h2>
+  <p>Create a Cloudflare account, install dependencies in <code>backend/cf-worker</code>, create a KV namespace for rate limiting, and replace the account and namespace IDs in <code>wrangler.toml</code> with your own IDs. The Worker uses a Cloudflare AI binding, so you do not put an API key in the browser.</p>
+  <pre><code>cd backend/cf-worker
+npm install
+npx wrangler login
+npx wrangler kv namespace create IMAGE_TO_PROMPT_KV
+# Set your KV namespace ID in wrangler.toml
+npx wrangler deploy</code></pre>
+  <p>Set the Worker AI binding named <code>AI</code> as described in the <a href="https://github.com/image-to-prompt/image-to-prompt.github.io/blob/main/backend/cf-worker/SETUP.md">Worker setup guide</a>. Provider availability and charges depend on your Cloudflare account.</p>
+  <h2>Option B: Docker with an OpenAI compatible API</h2>
+  <p>In <code>backend/docker</code>, copy <code>.env.example</code> to <code>.env</code>, set your provider key and model, then start Docker Compose. Keep <code>.env</code> private.</p>
+  <pre><code>cd backend/docker
+cp .env.example .env
+# Set OPENAI_API_KEY, MODEL, and CORS_ORIGIN in .env
+docker compose up -d --build</code></pre>
+  <p>The Docker backend accepts one image per request and uses an in-memory rate limit. For public deployment, configure your reverse proxy, HTTPS, trusted client IP handling, and durable rate limiting.</p>
+  <h2>Point the frontend at your backend</h2>
+  <p>Set <code>window.IMAGE_TO_PROMPT_API_URL</code> before the inline app script in <code>index.html</code>, or replace its default <code>API_BASE_URL</code>. Apply the same change to any translated pages you deploy. The value is your backend's public URL, never an API key.</p>
+  <pre><code>&lt;script&gt;window.IMAGE_TO_PROMPT_API_URL = 'https://your-api.example.com';&lt;/script&gt;</code></pre>
+  <p>Test <code>/api/health</code> first, then upload a non-sensitive image through your frontend. Confirm CORS allows your frontend origin and the response contains a prompt.</p>
+  <h2>Before you publish</h2>
+  <ul><li>Keep provider secrets in server-side environment variables or platform bindings.</li><li>Set a rate limit appropriate to your budget.</li><li>Review your provider's image retention and processing terms.</li><li>Update site copy to reflect your own limits and privacy practices.</li></ul>
+  <p>For a working prompt workflow, see the <a href="/blog/image-to-prompt-guide/">image to prompt guide</a>.</p>
+  <p>ImageToPrompt is made by the team behind <a data-maker-link href="https://upilote.com/">uPilote</a>.</p>
+</main>
+<footer><a href="/">Try ImageToPrompt</a> · <a href="https://github.com/image-to-prompt/image-to-prompt.github.io">View source</a></footer>
+<script src="/brand-promo.js" defer></script>
+</body>
+</html>
