@@ -12,6 +12,7 @@
   <meta property="og:url" content="https://image-to-prompt.github.io/blog/image-to-prompt-guide/">
   <style>body{margin:0;background:#0f172a;color:#f8fafc;font:17px/1.7 system-ui,sans-serif}header,main,footer{max-width:780px;margin:auto;padding:1.5rem}header{display:flex;justify-content:space-between;gap:1rem;align-items:center}a{color:#a5b4fc}nav{display:flex;gap:1rem;flex-wrap:wrap}h1{font-size:clamp(2rem,5vw,3.3rem);line-height:1.15}h2{margin-top:2.5rem}p,li{color:#cbd5e1}strong{color:#fff}.note{padding:1rem 1.25rem;border:1px solid #475569;border-radius:12px;background:#1e293b}footer{border-top:1px solid #334155}code{background:#1e293b;padding:.1rem .3rem;border-radius:3px}</style>
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Turn an Image Into an AI Prompt: A Practical Guide","mainEntityOfPage":"https://image-to-prompt.github.io/blog/image-to-prompt-guide/","author":{"@type":"Organization","name":"ImageToPrompt"}}</script>
+<link rel="stylesheet" href="/assets/theme.css?v=2">
 </head>
 <body>
 <header><a href="/">← ImageToPrompt</a><nav><a href="/#upload">Try the tool</a><a href="/blog/self-host-image-to-prompt/">Self-host</a><a href="https://github.com/image-to-prompt/image-to-prompt.github.io">GitHub</a></nav></header>
@@ -19,7 +20,7 @@
   <p>Image to Prompt guide</p>
   <h1>How to turn an image into an AI prompt</h1>
   <p>An image-to-prompt tool gives you a draft description of a reference image. The useful part happens when you decide which details to keep, change, or omit. Here is a simple workflow you can use with photos, illustrations, and design references.</p>
-  <h2>1. Start with a clear reference</h2>
+  <h2>A concrete example</h2><img src="/assets/ceramic-mug.webp" width="960" height="640" alt="Blue ceramic mug lit by a nearby window" style="width:100%;height:auto;border-radius:8px"><p>For this AI-generated reference, a manually edited prompt could read:</p><blockquote>A pale blue ceramic mug filled with coffee on a light wooden table beside a window. A cream linen napkin lies beneath it. Soft daylight from the left, gentle shadows, close framing, a warm neutral background, and visible texture in the glaze and wood.</blockquote><p>Check the handle, mug color, light direction, and fabric against the image. Keep those observable details. Do not invent a lens, camera brand, or the original generation prompt.</p><h2>1. Start with a clear reference</h2>
   <p>Choose an image where the main subject and composition are visible. Crop away UI, watermarks, or unrelated surroundings if they are not part of the result you want. Our <a href="/#upload">free image to prompt generator</a> accepts one JPG, PNG, or WebP image up to 10 MB. The hosted demo allows 3 conversions per IP per day.</p>
   <h2>2. Generate a visual description</h2>
   <p>Upload the image and read the returned text as an observation, not a reconstruction of the original creator's prompt. The model may identify a subject, style, colors, lighting, and camera angle. It can also omit details or guess incorrectly, especially when the reference is abstract or crowded.</p>

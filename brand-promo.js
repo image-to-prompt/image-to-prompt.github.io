@@ -11,7 +11,7 @@
     other: {
       name: 'uPilote',
       url: 'https://upilote.com/?utm_source=image-to-prompt&utm_medium=website&utm_campaign=maker-link',
-      line: 'Building a product from this idea? Describe it and work toward shipping it with uPilote.',
+      line: 'Have a website idea? Build it with uPilote.',
       link: 'Explore uPilote ↗'
     }
   };
