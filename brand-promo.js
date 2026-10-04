@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
   const api = window.IMAGE_TO_PROMPT_API_URL || 'https://image-to-prompt-api.tastyeffectco.workers.dev';
   const countries = new Set(['DZ','BH','KM','DJ','EG','IQ','JO','KW','LB','LY','MR','MA','OM','PS','QA','SA','SO','SD','SY','TN','AE','YE']);
   const copy = {
@@ -42,6 +42,6 @@
   show(language === 'ar' || (navigator.language || '').startsWith('ar'));
   fetch(api + '/api/region', {cache:'no-store'})
     .then(r => r.ok ? r.json() : Promise.reject())
-    .then(data => { if (typeof data.country === 'string') show(countries.has(data.country.toUpperCase())); })
+    .then(data => { if (typeof data.country === 'string') show(language === 'ar' || countries.has(data.country.toUpperCase())); })
     .catch(() => {});
 })();
